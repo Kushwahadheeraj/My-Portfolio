@@ -1,6 +1,6 @@
 import { Timeline } from "../models/timelineModel.js";
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
-import ErrorHandler from "../middlewares/error.js";
+import ErrorHandler from "../middlewares/errors.js";
 
 export const postTimeline = catchAsyncErrors(async (req, res, next) => {
   const { title, description, from, to } = req.body;
