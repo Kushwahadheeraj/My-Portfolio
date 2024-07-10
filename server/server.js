@@ -7,10 +7,11 @@ import cloudinary from "cloudinary";
 import { dbConnection } from './database/database.js';
 import { errorMiddleware } from './middlewares/errors.js';
 import messageRouter from './routes/messageRouter.js';
-import userRouter from './routes/userRouter.js'
-import timelineRouter from './routes/timelineRouter.js'
-import applicationRouter from './routes/softwareApplicationRouter.js'
-import skillRouter from './routes/skillRouter.js'
+import userRouter from './routes/userRouter.js';
+import timelineRouter from './routes/timelineRouter.js';
+import applicationRouter from './routes/softwareApplicationRouter.js';
+import skillRouter from './routes/skillRouter.js';
+import projectRouter from './routes/projectRouter.js'
 
 const app=express();
 
@@ -39,7 +40,8 @@ app.use("/api/v1/message",messageRouter);
 app.use("/api/v1/user",userRouter);
 app.use('/api/v1/timeline',timelineRouter);
 app.use('/api/v1/application',applicationRouter);
-app.use('/api/v1/skill',skillRouter)
+app.use('/api/v1/skill',skillRouter);
+app.use('/api/v1/project',projectRouter);
 
 cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
