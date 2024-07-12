@@ -130,13 +130,13 @@ export const login = catchAsyncErrors(async (req, res, next) => {
       const avatar = req.files.avatar;
       const user = await User.findById(req.user.id);
       const profileImageId = user.avatar.public_id;
-      await cloudinary.uploader.destroy(profileImageId);
-      const newProfileImage = await cloudinary.uploader.upload(
-        avatar.tempFilePath,
+      if(profileImageId){
+        await cloudinary.uploader.destroy(profileImageId);
+      }   
+      const newProfileImage = await cloudinary.uploader.upload(avatar.tempFilePath,
         {
           folder: "PORTFOLIO AVATAR",
-        }
-      );
+        });
       newUserData.avatar = {
         public_id: newProfileImage.public_id,
         url: newProfileImage.secure_url,
