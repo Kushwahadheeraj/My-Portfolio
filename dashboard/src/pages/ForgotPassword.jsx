@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { clearAllUserErrors } from "@/store/slices/userSlice";
-import { forgotPassword } from "@/store/slices/forgotPasswordSlice";
+import { forgotPassword } from "@/store/slices/forgotResetPassSlice";
 import { toast } from "react-toastify";
 import SpecialLoadingButton from "./sub-components/SpecialLoadingButton";
 

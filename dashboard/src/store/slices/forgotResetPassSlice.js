@@ -5,7 +5,6 @@ const forgotResetPassSlice = createSlice({
   name: "forgotPassword",
   initialState: {
     loading: false,
-    forgotPassword:{},
     error: null,
     message: null,
   },

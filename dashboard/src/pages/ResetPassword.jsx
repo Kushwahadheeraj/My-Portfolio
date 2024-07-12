@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import {
   resetPassword,
   clearAllForgotResetPassErrors,
-} from "@/store/slices/forgotPasswordSlice";
+} from "@/store/slices/forgotResetPassSlice";
 import { getUser } from "@/store/slices/userSlice";
 import SpecialLoadingButton from "./sub-components/SpecialLoadingButton";
 import { toast } from "react-toastify";
