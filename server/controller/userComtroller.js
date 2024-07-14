@@ -195,7 +195,7 @@ export const login = catchAsyncErrors(async (req, res, next) => {
   });
 
   export const getUserForPortfolio = catchAsyncErrors(async (req, res, next) => {
-    const id = "663296a896e553748ab5b0be";
+    const id = "6690f277677ee127882488d7";
     const user = await User.findById(id);
     res.status(200).json({
       success: true,
