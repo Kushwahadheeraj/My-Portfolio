@@ -11,6 +11,7 @@ import {
 import { getUser } from "@/store/slices/userSlice";
 import SpecialLoadingButton from "./sub-components/SpecialLoadingButton";
 import { toast } from "react-toastify";
+import Image from "./login.png"
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -84,7 +85,7 @@ const ResetPassword = () => {
         </div>
       </div>
       <div className="flex justify-center items-center bg-muted">
-        <img src="/reset.png" alt="login" />
+        <img src={Image} alt="login" />
       </div>
     </div>
   );

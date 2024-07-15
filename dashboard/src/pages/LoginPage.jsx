@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { clearAllUserErrors, login } from "@/store/slices/userSlice";
 import { toast } from "react-toastify";
 import SpecialLoadingButton from "./sub-components/SpecialLoadingButton";
+import Image from "./login.png"
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -83,7 +84,7 @@ const Login = () => {
         </div>
       </div>
       <div className="flex justify-center items-center bg-muted">
-        <img src="/login.png" alt="login" />
+        <img src={Image} alt="login" />
       </div>
     </div>
   );
