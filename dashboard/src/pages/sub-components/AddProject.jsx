@@ -141,9 +141,9 @@ const AddProject = () => {
                         <SelectContent>
                           <SelectItem value="Full Stack">Full Stack</SelectItem>
                           <SelectItem value="Mern">MERN</SelectItem>
-                          <SelectItem value="Mean">MEAN</SelectItem>
                           <SelectItem value="Next.JS">NEXT.JS</SelectItem>
                           <SelectItem value="React.JS">REACT.JS</SelectItem>
+                          <SelectItem value="HtmlCssJavaScript">HTML,CSS,JavaScript</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
