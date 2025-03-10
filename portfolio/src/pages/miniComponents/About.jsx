@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Image from "./dheeraj.jpg"
+import Image from "./Image.png"
 
 const About = () => {
   return (
@@ -27,6 +27,7 @@ const About = () => {
           <div className="flex justify-center items-center">
             <img
               src={Image}
+              
               alt="avatar"
               className="bg-white p-2 sm:p-4 rotate-[25deg] h-[240px] sm:h-[340px] md:h-[350px] lg:h-[450px]"
             />
