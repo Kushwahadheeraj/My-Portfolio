@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Portfolio = () => {
@@ -10,7 +9,7 @@ const Portfolio = () => {
   useEffect(() => {
     const getMyProjects = async () => {
       const { data } = await axios.get(
-        "https://my-portfolio-backend-4p63.onrender.com/api/v1/project/getall",
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/project/getall`,
         { withCredentials: true }
       );
       setProjects(data.projects);

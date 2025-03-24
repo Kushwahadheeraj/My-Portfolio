@@ -1,13 +1,13 @@
 import { Card } from "@/components/ui/card";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 
 const MyApps = () => {
   const [apps, setApps] = useState([]);
   useEffect(() => {
     const getMyApps = async () => {
       const { data } = await axios.get(
-        "https://my-portfolio-backend-4p63.onrender.com/api/v1/application/getall",
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/application/getall`,
         { withCredentials: true }
       );
       setApps(data.softwareApplications);

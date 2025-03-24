@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -19,7 +19,7 @@ const ViewProject = () => {
   useEffect(() => {
     const getProject = async () => {
       await axios
-        .get(`https://my-portfolio-backend-4p63.onrender.com/api/v1/project/get/${id}`, {
+        .get(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/project/get/${id}`, {
           withCredentials: true,
         })
         .then((res) => {

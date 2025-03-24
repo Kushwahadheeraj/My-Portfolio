@@ -10,7 +10,7 @@ const softwareApplicationSlice = createSlice({
     message: null,
   },
   reducers: {
-    getAllsoftwareApplicationsRequest(state, action) {
+    getAllsoftwareApplicationsRequest(state) {
       state.softwareApplications = [];
       state.error = null;
       state.loading = true;
@@ -21,11 +21,10 @@ const softwareApplicationSlice = createSlice({
       state.loading = false;
     },
     getAllsoftwareApplicationsFailed(state, action) {
-      state.softwareApplications = state.softwareApplications;
       state.error = action.payload;
       state.loading = false;
     },
-    addNewsoftwareApplicationsRequest(state, action) {
+    addNewsoftwareApplicationsRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -40,7 +39,7 @@ const softwareApplicationSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    deletesoftwareApplicationsRequest(state, action) {
+    deletesoftwareApplicationsRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -55,15 +54,13 @@ const softwareApplicationSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    resetSoftwareApplicationSlice(state, action) {
+    resetSoftwareApplicationSlice(state) {
       state.error = null;
-      state.softwareApplications = state.softwareApplications;
       state.message = null;
       state.loading = false;
     },
-    clearAllErrors(state, action) {
+    clearAllErrors(state) {
       state.error = null;
-      state.softwareApplications = state.softwareApplications;
     },
   },
 });
@@ -74,7 +71,7 @@ export const getAllSoftwareApplications = () => async (dispatch) => {
   );
   try {
     const response = await axios.get(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/application/getall",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/application/getall`,
       { withCredentials: true }
     );
     dispatch(
@@ -98,7 +95,7 @@ export const addNewSoftwareApplication = (data) => async (dispatch) => {
   );
   try {
     const response = await axios.post(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/application/add",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/application/add`,
       data,
       {
         withCredentials: true,
@@ -126,7 +123,7 @@ export const deleteSoftwareApplication = (id) => async (dispatch) => {
   );
   try {
     const response = await axios.delete(
-      `https://my-portfolio-backend-4p63.onrender.com/api/v1/application/delete/${id}`,
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/application/delete/${id}`,
       {
         withCredentials: true,
       }

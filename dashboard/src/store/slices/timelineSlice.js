@@ -10,7 +10,7 @@ const timelineSlice = createSlice({
     message: null,
   },
   reducers: {
-    getAllTimelineRequest(state, action) {
+    getAllTimelineRequest(state) {
       state.timeline = [];
       state.error = null;
       state.loading = true;
@@ -21,11 +21,10 @@ const timelineSlice = createSlice({
       state.loading = false;
     },
     getAllTimelineFailed(state, action) {
-      state.timeline = state.timeline;
       state.error = action.payload;
       state.loading = false;
     },
-    addNewTimelineRequest(state, action) {
+    addNewTimelineRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -40,7 +39,7 @@ const timelineSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    deleteTimelineRequest(state, action) {
+    deleteTimelineRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -55,13 +54,12 @@ const timelineSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    resetTimelineSlice(state, action) {
+    resetTimelineSlice(state) {
       state.error = null;
-      state.timeline = state.timeline;
       state.message = null;
       state.loading = false;
     },
-    clearAllErrors(state, action) {
+    clearAllErrors(state) {
       state.error = null;
       state = state.timeline;
     },
@@ -72,7 +70,7 @@ export const getAllTimeline = () => async (dispatch) => {
   dispatch(timelineSlice.actions.getAllTimelineRequest());
   try {
     const response = await axios.get(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/timeline/getall",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/timeline/getall`,
       { withCredentials: true }
     );
     dispatch(
@@ -90,7 +88,7 @@ export const addNewTimeline = (data) => async (dispatch) => {
   dispatch(timelineSlice.actions.addNewTimelineRequest());
   try {
     const response = await axios.post(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/timeline/add",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/timeline/add`,
       data,
       {
         withCredentials: true,
@@ -111,7 +109,7 @@ export const deleteTimeline = (id) => async (dispatch) => {
   dispatch(timelineSlice.actions.deleteTimelineRequest());
   try {
     const response = await axios.delete(
-      `https://my-portfolio-backend-4p63.onrender.com/api/v1/timeline/delete/${id}`,
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/timeline/delete/${id}`,
       {
         withCredentials: true,
       }

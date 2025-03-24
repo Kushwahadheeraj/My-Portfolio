@@ -12,7 +12,7 @@ const userSlice = createSlice({
     isUpdated: false,
   },
   reducers: {
-    loginRequest(state, action) {
+    loginRequest(state) {
       state.loading = true;
       state.isAuthenticated = false;
       state.user = {};
@@ -39,11 +39,9 @@ const userSlice = createSlice({
     },
     logoutFailed(state, action) {
       state.loading = false;
-      state.isAuthenticated = state.isAuthenticated;
-      state.user = state.user;
       state.error = action.payload;
     },
-    loadUserRequest(state, action) {
+    loadUserRequest(state) {
       state.loading = true;
       state.isAuthenticated = false;
       state.user = {};
@@ -61,7 +59,7 @@ const userSlice = createSlice({
       state.user = {};
       state.error = action.payload;
     },
-    updatePasswordRequest(state, action) {
+    updatePasswordRequest(state) {
       state.loading = true;
       state.isUpdated = false;
       state.message = null;
@@ -79,7 +77,7 @@ const userSlice = createSlice({
       state.message = null;
       state.error = action.payload;
     },
-    updateProfileRequest(state, action) {
+    updateProfileRequest(state) {
       state.loading = true;
       state.isUpdated = false;
       state.message = null;
@@ -97,12 +95,12 @@ const userSlice = createSlice({
       state.message = null;
       state.error = action.payload;
     },
-    updateProfileResetAfterUpdate(state, action) {
+    updateProfileResetAfterUpdate(state) {
       state.error = null;
       state.isUpdated = false;
       state.message = null;
     },
-    clearAllErrors(state, action) {
+    clearAllErrors(state) {
       state.error = null;
       state = state.user;
     },
@@ -113,7 +111,7 @@ export const login = (email, password) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
     const { data } = await axios.post(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/user/login",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/login`,
       { email, password },
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
@@ -127,7 +125,7 @@ export const login = (email, password) => async (dispatch) => {
 export const getUser = () => async (dispatch) => {
   dispatch(userSlice.actions.loadUserRequest());
   try {
-    const { data } = await axios.get("https://my-portfolio-backend-4p63.onrender.com/api/v1/user/me", {
+    const { data } = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/me`, {
       withCredentials: true,
     });
     dispatch(userSlice.actions.loadUserSuccess(data.user));
@@ -137,25 +135,25 @@ export const getUser = () => async (dispatch) => {
   }
 };
 
-// export const logout = () => async (dispatch) => {
-//   try {
-//     const { data } = await axios.get(
-//       "https://my-portfolio-backend-4p63.onrender.com/api/v1/user/logout",
-//       { withCredentials: true }
-//     );
-//     dispatch(userSlice.actions.logoutSuccess(data.message));
-//     dispatch(userSlice.actions.clearAllErrors());
-//   } catch (error) {
-//     dispatch(userSlice.actions.logoutFailed(error.response.data.message));
-//   }
-// };
+export const logout = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/logout`,
+      { withCredentials: true }
+    );
+    dispatch(userSlice.actions.logoutSuccess(data.message));
+    dispatch(userSlice.actions.clearAllErrors());
+  } catch (error) {
+    dispatch(userSlice.actions.logoutFailed(error.response.data.message));
+  }
+};
 
 export const updatePassword =
   (currentPassword, newPassword, confirmNewPassword) => async (dispatch) => {
     dispatch(userSlice.actions.updatePasswordRequest());
     try {
       const { data } = await axios.put(
-        "https://my-portfolio-backend-4p63.onrender.com/api/v1/user/password/update",
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/password/update`,
         { currentPassword, newPassword, confirmNewPassword },
         {
           withCredentials: true,
@@ -175,7 +173,7 @@ export const updateProfile = (data) => async (dispatch) => {
   dispatch(userSlice.actions.updateProfileRequest());
   try {
     const response = await axios.put(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/user/me/profile/update",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/me/profile/update`,
       data,
       {
         withCredentials: true,

@@ -17,7 +17,7 @@ import {
     useEffect(() => {
       const getMyProfile = async () => {
         const { data } = await axios.get(
-          "https://my-portfolio-backend-4p63.onrender.com/api/v1/user/portfolio/me",
+          `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/portfolio/me`,
           { withCredentials: true }
         );
         setUser(data.user);
@@ -32,7 +32,7 @@ import {
         </div>
         <h1 className="overflow-x-hidden text-[1.3rem] sm:text-[1.75rem] 
         md:text-[2.2rem] lg:text-[2.8rem] tracking-[2px] mb-4">
-          Hey, I'm Dheeraj Kushwaha
+          Hey, Im Dheeraj Kushwaha
         </h1>
         <h1 className="text-tubeLight-effect overflow-x-hidden text-[1.3rem] 
         sm:text-[1.75rem] md:text-[2.2rem] lg:text-[2.8rem] tracking-[15px]">

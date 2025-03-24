@@ -9,7 +9,7 @@ const forgotResetPassSlice = createSlice({
     message: null,
   },
   reducers: {
-    forgotPasswordRequest(state, action) {
+    forgotPasswordRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -24,7 +24,7 @@ const forgotResetPassSlice = createSlice({
       state.error = action.payload;
       state.message = null;
     },
-    resetPasswordRequest(state, action) {
+    resetPasswordRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -39,9 +39,8 @@ const forgotResetPassSlice = createSlice({
       state.error = action.payload;
       state.message = null;
     },
-    clearAllErrors(state, action) {
+    clearAllErrors(state) {
       state.error = null;
-      state = state;
     },
   },
 });
@@ -51,7 +50,7 @@ export const forgotPassword = (email) => async (dispatch) => {
     dispatch(forgotResetPassSlice.actions.forgotPasswordRequest());
     console.log(email);
     const response = await axios.post(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/user/password/forgot",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/password/forgot`,
       { email },
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
@@ -74,7 +73,7 @@ export const resetPassword =
     try {
       dispatch(forgotResetPassSlice.actions.resetPasswordRequest());
       const response = await axios.put(
-        ` https://my-portfolio-backend-4p63.onrender.com/api/v1/user/password/reset/${token}`,
+        `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/user/password/reset/${token}`,
         { password, confirmPassword },
         {
           withCredentials: true,

@@ -33,7 +33,7 @@ const ManageSkills = () => {
   const handleReturnToDashboard = () => {
     navigateTo("/");
   };
-  const { loading, skills, error, message } = useSelector(
+  const {  skills, error, message } = useSelector(
     (state) => state.skill
   );
   const dispatch = useDispatch();
@@ -44,12 +44,13 @@ const ManageSkills = () => {
   };
 
   const handleUpdateSkill = (id) => {
-    dispatch(updateSkill(id, newProficiency));
+    dispatch(updateSkill({ id, proficiency: newProficiency }));
   };
-
+  
   const handleDeleteSkill = (id) => {
-    dispatch(deleteSkill(id));
+    dispatch(deleteSkill({ id }));
   };
+  
 
   useEffect(() => {
     if (error) {
@@ -61,8 +62,8 @@ const ManageSkills = () => {
       dispatch(resetSkillSlice());
       dispatch(getAllSkills());
     }
-  }, [dispatch, loading, error]);
-
+  }, [dispatch, error, message]); 
+  
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <Tabs defaultValue="week">

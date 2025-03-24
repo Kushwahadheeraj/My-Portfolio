@@ -11,7 +11,7 @@ const projectSlice = createSlice({
     singleProject: {},
   },
   reducers: {
-    getAllProjectsRequest(state, action) {
+    getAllProjectsRequest(state) {
       state.projects = [];
       state.error = null;
       state.loading = true;
@@ -22,11 +22,10 @@ const projectSlice = createSlice({
       state.loading = false;
     },
     getAllProjectsFailed(state, action) {
-      state.projects = state.projects;
       state.error = action.payload;
       state.loading = false;
     },
-    addNewProjectRequest(state, action) {
+    addNewProjectRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -41,7 +40,7 @@ const projectSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    deleteProjectRequest(state, action) {
+    deleteProjectRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -56,7 +55,7 @@ const projectSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    updateProjectRequest(state, action) {
+    updateProjectRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -71,13 +70,12 @@ const projectSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    resetProjectSlice(state, action) {
+    resetProjectSlice(state) {
       state.error = null;
-      state.projects = state.projects;
       state.message = null;
       state.loading = false;
     },
-    clearAllErrors(state, action) {
+    clearAllErrors(state) {
       state.error = null;
       state = state.projects;
     },
@@ -88,7 +86,7 @@ export const getAllProjects = () => async (dispatch) => {
   dispatch(projectSlice.actions.getAllProjectsRequest());
   try {
     const response = await axios.get(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/project/getall",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/project/getall`,
       { withCredentials: true }
     );
     dispatch(
@@ -106,7 +104,7 @@ export const addNewProject = (data) => async (dispatch) => {
   dispatch(projectSlice.actions.addNewProjectRequest());
   try {
     const response = await axios.post(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/project/add",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/project/add`,
       data,
       {
         withCredentials: true,
@@ -125,7 +123,7 @@ export const deleteProject = (id) => async (dispatch) => {
   dispatch(projectSlice.actions.deleteProjectRequest());
   try {
     const response = await axios.delete(
-      `https://my-portfolio-backend-4p63.onrender.com/api/v1/project/delete/${id}`,
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/project/delete/${id}`,
       {
         withCredentials: true,
       }
@@ -142,7 +140,7 @@ export const updateProject = (id, newData) => async (dispatch) => {
   dispatch(projectSlice.actions.updateProjectRequest());
   try {
     const response = await axios.put(
-      `https://my-portfolio-backend-4p63.onrender.com/api/v1/project/update/${id}`,
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/project/update/${id}`,
       newData,
       {
         withCredentials: true,

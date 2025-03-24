@@ -10,7 +10,7 @@ const skillSlice = createSlice({
     message: null,
   },
   reducers: {
-    getAllSkillsRequest(state, action) {
+    getAllSkillsRequest(state) {
       state.skills = [];
       state.error = null;
       state.loading = true;
@@ -21,11 +21,10 @@ const skillSlice = createSlice({
       state.loading = false;
     },
     getAllSkillsFailed(state, action) {
-      state.skills = state.skills;
       state.error = action.payload;
       state.loading = false;
     },
-    addNewSkillRequest(state, action) {
+    addNewSkillRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -40,7 +39,7 @@ const skillSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    deleteSkillRequest(state, action) {
+    deleteSkillRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -55,7 +54,7 @@ const skillSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    updateSkillRequest(state, action) {
+    updateSkillRequest(state) {
       state.loading = true;
       state.error = null;
       state.message = null;
@@ -70,15 +69,13 @@ const skillSlice = createSlice({
       state.loading = false;
       state.message = null;
     },
-    resetSkillSlice(state, action) {
+    resetSkillSlice(state) {
       state.error = null;
-      state.skills = state.skills;
       state.message = null;
       state.loading = false;
     },
-    clearAllErrors(state, action) {
+    clearAllErrors(state) {
       state.error = null;
-      state.skills = state.skills;
     },
   },
 });
@@ -87,7 +84,7 @@ export const getAllSkills = () => async (dispatch) => {
   dispatch(skillSlice.actions.getAllSkillsRequest());
   try {
     const response = await axios.get(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/skill/getall",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/skill/getall`,
       { withCredentials: true }
     );
     dispatch(skillSlice.actions.getAllSkillsSuccess(response.data.skills));
@@ -103,7 +100,7 @@ export const addNewSkill = (data) => async (dispatch) => {
   dispatch(skillSlice.actions.addNewSkillRequest());
   try {
     const response = await axios.post(
-      "https://my-portfolio-backend-4p63.onrender.com/api/v1/skill/add",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/skill/add`,
       data,
       {
         withCredentials: true,
@@ -123,7 +120,7 @@ export const updateSkill = (id, proficiency) => async (dispatch) => {
   dispatch(skillSlice.actions.updateSkillRequest());
   try {
     const response = await axios.put(
-      `https://my-portfolio-backend-4p63.onrender.com/api/v1/skill/update/${id}`,
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/skill/update/${id}`,
       { proficiency },
       {
         withCredentials: true,
@@ -141,7 +138,7 @@ export const deleteSkill = (id) => async (dispatch) => {
   dispatch(skillSlice.actions.deleteSkillRequest());
   try {
     const response = await axios.delete(
-      `https://my-portfolio-backend-4p63.onrender.com/api/v1/skill/delete/${id}`,
+      `${import.meta.env.VITE_REACT_APP_BACKEND_URL}/api/v1/skill/delete/${id}`,
       {
         withCredentials: true,
       }
